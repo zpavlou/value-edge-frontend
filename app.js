@@ -1,6 +1,5 @@
-﻿const API_URL =
-  import.meta.env.VITE_API_URL ||
-  "https://value-edge-backend.onrender.com";
+```javascript
+const API_URL = "https://value-edge-backend.onrender.com";
 
 function render(picks) {
   const root = document.getElementById("results");
@@ -70,8 +69,7 @@ function render(picks) {
                 (
                   ((odds - 1) * prob - (1 - prob)) /
                   (odds - 1)
-                ) /
-                  4
+                ) / 4
               )
             ).toFixed(2)}
           </b>
@@ -97,70 +95,102 @@ async function scanToday() {
   const status = document.getElementById("status");
   const button = document.getElementById("scan");
 
-  const minOdds = Number(document.getElementById("minOdds").value);
-  const maxOdds = Number(document.getElementById("maxOdds").value);
-
-  const sports = Array.from(document.querySelectorAll(".sport:checked")).map(
-    (input) => input.value
+  const minOdds = Number(
+    document.getElementById("minOdds").value
   );
 
+  const maxOdds = Number(
+    document.getElementById("maxOdds").value
+  );
+
+  const sports = Array.from(
+    document.querySelectorAll(".sport:checked")
+  ).map((input) => input.value);
+
   if (sports.length === 0) {
-    status.textContent = "Please select at least one sport.";
+    status.textContent =
+      "Please select at least one sport.";
     return;
   }
 
   button.disabled = true;
   button.textContent = "RESEARCHING...";
-  status.textContent = "Running live sports research...";
+  status.textContent =
+    "Running live sports research...";
 
   try {
-    const response = await fetch(`${API_URL}/api/scan`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        min_odds: minOdds,
-        max_odds: maxOdds,
-        sports: sports
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error(`Backend returned HTTP ${response.status}`);
-    }
+    const response = await fetch(
+      `${API_URL}/api/scan`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          min_odds: minOdds,
+          max_odds: maxOdds,
+          sports: sports,
+          bankroll: 100
+        })
+      }
+    );
 
     const data = await response.json();
 
-    if (!data || !Array.isArray(data.picks)) {
-      throw new Error("Backend returned an invalid response.");
+    if (!response.ok) {
+      throw new Error(
+        data.error ||
+        `Backend returned ${response.status}`
+      );
+    }
+
+    if (!Array.isArray(data.picks)) {
+      throw new Error(
+        "Backend returned an invalid picks list."
+      );
     }
 
     if (data.picks.length === 0) {
-      status.textContent = "No qualifying bets found.";
-      document.getElementById("results").innerHTML = "";
+      status.textContent =
+        "No qualifying bets found.";
+
+      document.getElementById(
+        "results"
+      ).innerHTML = "";
+
       return;
     }
 
-    status.textContent = `Found ${data.picks.length} qualifying pick(s).`;
-    render(data.picks);
-  } catch (error) {
-    console.error("Scan error:", error);
-    status.textContent = "Unable to connect to the live research backend.";
+    status.textContent =
+      `Found ${data.picks.length} qualifying pick(s).`;
 
-    document.getElementById("results").innerHTML = `
+    render(data.picks);
+
+  } catch (error) {
+    console.error("SCAN ERROR:", error);
+
+    status.textContent =
+      "Live research connection failed.";
+
+    document.getElementById(
+      "results"
+    ).innerHTML = `
       <article class="pick">
-        <h2>Connection error</h2>
-        <p>
-          The live research backend could not be reached.
-          Please try again.
-        </p>
+        <h2>Connection Error</h2>
+        <p>${error.message}</p>
       </article>
     `;
+
   } finally {
     button.disabled = false;
     button.textContent = "SCAN TODAY";
   }
 }
 
-document.getElementById("scan").addEventListener("click", scanToday);
+document
+  .getElementById("scan")
+  .addEventListener(
+    "click",
+    scanToday
+  );
+```
