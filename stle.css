@@ -1,0 +1,16 @@
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#f4f6fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:82px}
+.top{position:sticky;top:0;z-index:5;background:#080b12ee;backdrop-filter:blur(14px);display:flex;justify-content:space-between;align-items:center;padding:18px;border-bottom:1px solid #1b2230}
+.brand{font-weight:800;letter-spacing:1.7px}.sub{font-size:11px;color:#8e98aa;margin-top:3px}.icon{background:#141a25;border:1px solid #252e3d;border-radius:12px;padding:10px;color:#fff}
+.hero{margin:18px 16px;padding:22px;border-radius:22px;background:linear-gradient(145deg,#151d2b,#0e131d);border:1px solid #263043}
+.eyebrow,.label{font-size:11px;color:#8e9bb0;letter-spacing:1.3px;font-weight:700}.hero h1{font-size:30px;margin:7px 0}.hero p{color:#aeb7c5;margin:0 0 18px;font-size:14px;line-height:1.5}
+.primary{width:100%;border:0;border-radius:14px;padding:14px;background:#62e6a5;color:#07110b;font-weight:800;font-size:15px}
+.card,.pick{margin:14px 16px;padding:16px;border:1px solid #202a3a;border-radius:18px;background:#0e141e}
+.range{display:flex;gap:9px;align-items:center;margin:10px 0}.range input{width:100%;background:#090d14;color:#fff;border:1px solid #293446;border-radius:10px;padding:11px;font-size:15px}
+.range span{color:#657084}.sports{display:flex;gap:14px;color:#bac3d0;font-size:13px}.sports input{accent-color:#62e6a5}
+#status{margin:12px 18px;color:#8792a5;font-size:13px}
+.rank{color:#62e6a5;font-size:12px;font-weight:800}.pick h2{font-size:21px;margin:5px 0 3px}.market{font-size:12px;color:#8d98aa}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:15px}.metric{background:#080d14;border-radius:12px;padding:11px}.metric label{display:block;color:#798497;font-size:10px;text-transform:uppercase;letter-spacing:.6px}.metric b{font-size:17px;display:block;margin-top:3px}.positive{color:#62e6a5}
+.why,.risks{margin-top:16px}.why h3,.risks h3{font-size:12px;color:#9aa6b8;margin:0 0 8px;text-transform:uppercase;letter-spacing:.7px}.why div,.risks div{font-size:13px;line-height:1.45;margin:5px 0;color:#d5dbe4}
+.demo{font-size:11px;color:#657084;margin-top:12px}.math>div:not(.label){display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #1b2432;font-size:12px}.math>div span{color:#8894a7;text-align:right}.fine{font-size:11px;color:#798497;line-height:1.5}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:67px;background:#0a0e16ee;backdrop-filter:blur(14px);border-top:1px solid #1d2635;display:flex;justify-content:space-around;align-items:center;color:#687489;font-size:11px}.bottom .active{color:#62e6a5;font-weight:700}
